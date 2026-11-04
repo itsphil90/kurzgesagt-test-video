@@ -8,54 +8,64 @@
       @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Outfit:wght@500;700;900&display=swap');
       :root {
         --space-bg: #0b0e1a;
-        --kurz-coral: #ff6b6b;
+        --kurz-purple: #a06cd5;
         --kurz-teal: #4ecdc4;
-        --lightning: #ffe66d;
+        --octo-purple: #7b2cb8;
         --text-bright: #ffffff;
         --font-main: 'Fredoka', 'Outfit', sans-serif;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--space-bg); font-family: var(--font-main); color: var(--text-bright); }
-      .scene, #root { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      #root { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
       .flat-stroke { stroke: #080a14; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-      .lightning-bolt { fill: var(--lightning); stroke: #ffb703; stroke-width: 4; }
-      .sun-core { fill: #ffb703; }
-      .bar-teal { fill: var(--kurz-teal); }
-      .bar-coral { fill: var(--kurz-coral); }
+      .brain-node { fill: var(--kurz-teal); stroke: #080a14; stroke-width: 4; }
+      .brain-central { fill: #ff6b6b; stroke: #080a14; stroke-width: 5; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="scene3" data-start="0" data-duration="6" data-width="1920" data-height="1080">
-      <h2 class="title clip" data-start="0" data-duration="6" style="font-size:52px; font-weight:700; margin-bottom:60px; text-align:center; color:var(--text-bright);">
-        Five Times Hotter Than The Sun's Surface
+    <div id="root" data-composition-id="scene3" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+      <h2 class="title clip" data-start="0" data-duration="8" style="font-size:60px; font-weight:700; margin-bottom:100px;">
+        One central brain, and 8 mini-brains.
       </h2>
 
-      <!-- Comparison Bars -->
-      <div style="display:flex; flex-direction:column; gap:50px; width:1000px;">
-        <!-- Sun Bar -->
-        <div style="display:flex; align-items:center; gap:30px;">
-          <span style="font-size:36px; font-weight:700; color:#ffb703; width:140px;">The Sun</span>
-          <div style="width:300px; height:60px; background:rgba(255,183,3,0.15); border-radius:12px; overflow:hidden; border:3px solid #ffb703;">
-            <div class="bar-teal clip" data-start="0" data-duration="6" style="width:100%; height:100%; transform-origin:0 50%; transform:scaleX(0);"></div>
-          </div>
-          <span style="font-size:40px; font-weight:700; color:#ffb703;">10,000°F</span>
-        </div>
+      <div style="position:relative; width:600px; height:400px;">
+        <!-- Central Brain -->
+        <circle cx="300" cy="200" r="60" class="brain-central clip" data-start="0" data-duration="8" id="c-brain" />
 
-        <!-- Lightning Bar -->
-        <div style="display:flex; align-items:center; gap:30px;">
-          <span style="font-size:36px; font-weight:700; color:#ffe66d; width:140px;">Lightning</span>
-          <div style="width:600px; height:60px; background:rgba(255,107,107,0.15); border-radius:12px; overflow:hidden; border:3px solid var(--kurz-coral);">
-            <div class="bar-coral clip" data-start="0" data-duration="6" style="width:100%; height:100%; transform-origin:0 50%; transform:scaleX(0);"></div>
-          </div>
-          <span style="font-size:40px; font-weight:700; color:#ffe66d;">50,000°F</span>
-        </div>
+        <!-- Mini Brains (Arms) -->
+        <g class="mini-brains">
+          <circle cx="300" cy="60" r="25" class="brain-node clip" data-start="0.5" data-duration="7.5" id="b1" />
+          <circle cx="440" cy="100" r="25" class="brain-node clip" data-start="0.6" data-duration="7.4" id="b2" />
+          <circle cx="500" cy="200" r="25" class="brain-node clip" data-start="0.7" data-duration="7.3" id="b3" />
+          <circle cx="440" cy="300" r="25" class="brain-node clip" data-start="0.8" data-duration="7.2" id="b4" />
+          <circle cx="300" cy="340" r="25" class="brain-node clip" data-start="0.9" data-duration="7.1" id="b5" />
+          <circle cx="160" cy="300" r="25" class="brain-node clip" data-start="1.0" data-duration="7.0" id="b6" />
+          <circle cx="100" cy="200" r="25" class="brain-node clip" data-start="1.1" data-duration="6.9" id="b7" />
+          <circle cx="160" cy="100" r="25" class="brain-node clip" data-start="1.2" data-duration="6.8" id="b8" />
+        </g>
+
+        <!-- Connecting Lines -->
+        <svg width="600" height="400" style="position:absolute; top:0; left:0; z-index:-1;">
+          <g stroke="rgba(78,205,196,0.3)" stroke-width="4" stroke-dasharray="8 8">
+            <line x1="300" y1="200" x2="300" y2="60" class="conn" />
+            <line x1="300" y1="200" x2="440" y2="100" class="conn" />
+            <line x1="300" y1="200" x2="500" y2="200" class="conn" />
+            <line x1="300" y1="200" x2="440" y2="300" class="conn" />
+            <line x1="300" y1="200" x2="300" y2="340" class="conn" />
+            <line x1="300" y1="200" x2="160" y2="300" class="conn" />
+            <line x1="300" y1="200" x2="100" y2="200" class="conn" />
+            <line x1="300" y1="200" x2="160" y2="100" class="conn" />
+          </g>
+        </svg>
       </div>
     </div>
     <script>
       const tl = gsap.timeline({ paused: true });
       tl.fromTo(".title", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
-      tl.fromTo(".bar-teal", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.out" }, 0.3);
-      tl.fromTo(".bar-coral", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power3.out" }, 0.6);
+      tl.fromTo("#c-brain", { scale: 0 }, { scale: 1, duration: 0.8, ease: "back.out(1.7)" }, 0.2);
+      tl.fromTo(".brain-node", { scale: 0 }, { scale: 1, duration: 0.5, stagger: 0.1, ease: "back.out(1.7)" }, 0.6);
+      tl.fromTo(".conn", { opacity: 0 }, { opacity: 1, duration: 0.8, stagger: 0.05 }, 1.0);
+      tl.to(".brain-node", { y: "+=10", duration: 1.5, repeat: 4, yoyo: true, ease: "sine.inOut", stagger: 0.1 }, 1.2);
       window.__timelines["scene3"] = tl;
       tl.seek(0);
     </script>
