@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Outfit:wght@500;700;900&display=swap');
+      :root {
+        --space-bg: #0b0e1a;
+        --kurz-coral: #ff6b6b;
+        --kurz-teal: #4ecdc4;
+        --lightning: #ffe66d;
+        --text-bright: #ffffff;
+        --font-main: 'Fredoka', 'Outfit', sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--space-bg); font-family: var(--font-main); color: var(--text-bright); }
+      .scene, #root { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .flat-stroke { stroke: #080a14; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .lightning-bolt { fill: var(--lightning); stroke: #ffb703; stroke-width: 4; }
+      .sun-core { fill: #ffb703; }
+      .bar-teal { fill: var(--kurz-teal); }
+      .bar-coral { fill: var(--kurz-coral); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="scene3" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+      <h2 class="title clip" data-start="0" data-duration="6" style="font-size:52px; font-weight:700; margin-bottom:60px; text-align:center; color:var(--text-bright);">
+        Five Times Hotter Than The Sun's Surface
+      </h2>
+
+      <!-- Comparison Bars -->
+      <div style="display:flex; flex-direction:column; gap:50px; width:1000px;">
+        <!-- Sun Bar -->
+        <div style="display:flex; align-items:center; gap:30px;">
+          <span style="font-size:36px; font-weight:700; color:#ffb703; width:140px;">The Sun</span>
+          <div style="width:300px; height:60px; background:rgba(255,183,3,0.15); border-radius:12px; overflow:hidden; border:3px solid #ffb703;">
+            <div class="bar-teal clip" data-start="0" data-duration="6" style="width:100%; height:100%; transform-origin:0 50%; transform:scaleX(0);"></div>
+          </div>
+          <span style="font-size:40px; font-weight:700; color:#ffb703;">10,000°F</span>
+        </div>
+
+        <!-- Lightning Bar -->
+        <div style="display:flex; align-items:center; gap:30px;">
+          <span style="font-size:36px; font-weight:700; color:#ffe66d; width:140px;">Lightning</span>
+          <div style="width:600px; height:60px; background:rgba(255,107,107,0.15); border-radius:12px; overflow:hidden; border:3px solid var(--kurz-coral);">
+            <div class="bar-coral clip" data-start="0" data-duration="6" style="width:100%; height:100%; transform-origin:0 50%; transform:scaleX(0);"></div>
+          </div>
+          <span style="font-size:40px; font-weight:700; color:#ffe66d;">50,000°F</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(".title", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+      tl.fromTo(".bar-teal", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.out" }, 0.3);
+      tl.fromTo(".bar-coral", { scaleX: 0 }, { scaleX: 1, duration: 1.0, ease: "power3.out" }, 0.6);
+      window.__timelines["scene3"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

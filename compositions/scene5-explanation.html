@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Outfit:wght@500;700;900&display=swap');
+      :root {
+        --space-bg: #0b0e1a;
+        --kurz-teal: #4ecdc4;
+        --duck-yellow: #ffd166;
+        --duck-beak: #f77f00;
+        --text-bright: #ffffff;
+        --font-main: 'Fredoka', 'Outfit', sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--space-bg); font-family: var(--font-main); color: var(--text-bright); }
+      .scene, #root { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding:0 120px; }
+      .flat-stroke { stroke: #080a14; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .duck-body { fill: var(--duck-yellow); }
+      .duck-beak { fill: var(--duck-beak); }
+      .space-suit { fill: #f8f9fa; }
+      .helmet-glass { fill: rgba(78, 205, 196, 0.35); stroke: var(--kurz-teal); stroke-width: 6; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="scene5" data-start="0" data-duration="3.1" data-width="1920" data-height="1080">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; width:100%; height:100%; align-items:center;">
+
+        <!-- Duck Character -->
+        <div style="display:flex; justify-content:center;">
+          <svg width="380" height="380" viewBox="0 0 380 380">
+            <path d="M-120,180 Q-130,20 -60,-30 L60,-30 Q130,20 120,180 Z" class="space-suit flat-stroke" />
+            <circle cx="-40" cy="50" r="24" fill="#a06cd5" class="flat-stroke" />
+            <polygon points="-40,36 -28,60 -52,60" fill="#ffe66d" />
+            <circle cx="0" cy="-80" r="110" class="duck-body flat-stroke" />
+            <circle cx="35" cy="-105" r="16" fill="#080a14" />
+            <circle cx="40" cy="-110" r="6" fill="#ffffff" />
+            <path d="M30,-80 C95,-80 115,-55 100,-35 C85,-15 30,-45 30,-80 Z" class="duck-beak flat-stroke" />
+            <circle cx="15" cy="-80" r="150" class="helmet-glass" />
+            <path d="M-80,-160 A140,140 0 0,1 60,-215 A160,160 0 0,0 -110,-105 Z" fill="rgba(255,255,255,0.4)" />
+            <path d="M-110,15 Q-185,30 -170,110 Q-120,120 -95,55 Z" class="space-suit flat-stroke" />
+            <path d="M110,15 Q185,30 170,110 Q120,120 95,55 Z" class="space-suit flat-stroke" />
+          </svg>
+        </div>
+
+        <!-- Explanation Text -->
+        <div>
+          <h2 class="title clip" data-start="0" data-duration="3.1" style="font-size:56px; font-weight:700; line-height:1.2; margin-bottom:24px;">
+            Lightning superheats the air around it, creating a shockwave we hear as <span style="color:#4ecdc4;">thunder</span>.
+          </h2>
+          <p class="desc clip" data-start="0" data-duration="3.1" style="font-size:32px; color:#d0c2b2; line-height:1.4;">
+            The air expands faster than the speed of sound — that is why the flash always comes first.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(".title", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 0);
+      tl.fromTo(".desc", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0.3);
+      tl.to("svg", { y: -8, duration: 2, repeat: 1, yoyo: true, ease: "sine.inOut" }, 0);
+      window.__timelines["scene5"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

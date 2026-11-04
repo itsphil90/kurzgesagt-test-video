@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Outfit:wght@500;700;900&display=swap');
+      :root {
+        --space-bg: #0b0e1a;
+        --kurz-coral: #ff6b6b;
+        --sun-yellow: #ffb703;
+        --lightning: #ffe66d;
+        --text-bright: #ffffff;
+        --font-main: 'Fredoka', 'Outfit', sans-serif;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--space-bg); font-family: var(--font-main); color: var(--text-bright); }
+      .scene, #root { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+      .flat-stroke { stroke: #080a14; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .sun-core { fill: var(--sun-yellow); }
+      .sun-glow { fill: var(--sun-glow); opacity: 0.4; }
+      .lightning-bolt { fill: var(--lightning); stroke: #ffb703; stroke-width: 4; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="scene2" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:100px; width:100%; height:100%; align-items:center; justify-content:center; padding:0 100px;">
+        <!-- Sun Side -->
+        <div style="text-align:center;">
+          <svg width="320" height="320" viewBox="0 0 320 320" style="margin-bottom:30px;">
+            <circle cx="160" cy="160" r="140" class="sun-glow" filter="url(#sun-blur)" />
+            <circle cx="160" cy="160" r="110" class="sun-core flat-stroke" />
+            <line x1="160" y1="0" x2="160" y2="30" stroke="#ffb703" stroke-width="8" stroke-linecap="round" />
+            <line x1="160" y1="320" x2="160" y2="290" stroke="#ffb703" stroke-width="8" stroke-linecap="round" />
+            <line x1="0" y1="160" x2="30" y2="160" stroke="#ffb703" stroke-width="8" stroke-linecap="round" />
+            <line x1="320" y1="160" x2="290" y2="160" stroke="#ffb703" stroke-width="8" stroke-linecap="round" />
+          </svg>
+          <h2 style="font-size:48px; font-weight:700; color:#ffb703;">The Sun</h2>
+          <p style="font-size:32px; color:#d0c2b2; margin-top:10px;">10,000°F</p>
+        </div>
+
+        <!-- Lightning Side -->
+        <div style="text-align:center;">
+          <svg width="320" height="320" viewBox="0 0 320 320" style="margin-bottom:30px;">
+            <polygon points="160,20 80,160 180,160 120,280 240,100 140,100" class="lightning-bolt flat-stroke" />
+          </svg>
+          <h2 style="font-size:48px; font-weight:700; color:#ffe66d;">Lightning</h2>
+          <p style="font-size:32px; color:#d0c2b2; margin-top:10px;">50,000°F</p>
+        </div>
+      </div>
+    </div>
+    <svg style="display:none"><filter id="sun-blur"><feGaussianBlur stdDeviation="15" /></filter></svg>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo(".scene > div:first-child", { opacity: 0, x: -100 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 0);
+      tl.fromTo(".scene > div:last-child", { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.to(".lightning-bolt", { scale: 1.05, duration: 0.3, repeat: 3, yoyo: true, ease: "power1.inOut" }, 1.0);
+      window.__timelines["scene2"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
