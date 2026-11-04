@@ -1,0 +1,52 @@
+name: Render Video
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      quality:
+        description: 'Render quality'
+        required: false
+        default: 'standard'
+        type: choice
+        options:
+          - draft
+          - standard
+          - high
+
+jobs:
+  render:
+    name: Render HyperFrames Video
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate composition (Check)
+        run: npm run check
+
+      - name: Render MP4
+        run: npx hyperframes render --quality ${{ inputs.quality || 'standard' }}
+
+      - name: Upload Rendered MP4 Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rendered-video
+          path: renders/*.mp4
+          retention-days: 7
